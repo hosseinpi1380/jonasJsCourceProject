@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .image-source{
+    background-image:linear-gradient(to right,rgba(246, 156, 132,.2), rgba(251, 217, 137,.4));
+    background-position: center;
+    block-size: cover;
+} */
+.loading{
+    width: 10px;
+    height: 10px;
+    fill: #f38e82;
+    animation: loading 2s infinite linear;
+    margin: 5rem auto;
+}
+
+@keyframes loading {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
