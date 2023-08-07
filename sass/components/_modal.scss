@@ -1,0 +1,57 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60rem;
+    background-color: #f3f3f3;
+    z-index: 1000;
+    padding: 5rem 6rem;
+    box-shadow: 0 0 1rem black;
+    align-content: center;
+    transition: all .5s;
+    &__header {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 3rem;
+        gap: 2.5rem;
+    }
+
+    &__label {
+        font-size: 1.7rem;
+        font-weight: 500;
+    }
+    &__input{
+        font-size: 1.7rem;
+        padding: 1rem 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+    }
+    .btn{
+        grid-column: 1/span 2;
+        background-color: $color-primary;
+    }
+}
+
+.highlight {
+    background-image: $gradient-primary;
+}
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(black, 0.6);
+    z-index: 100;
+    backdrop-filter: blur(4px);
+}
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+}

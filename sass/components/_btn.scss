@@ -1,0 +1,56 @@
+.btn {
+    padding: 1.25rem 4rem;
+    border: none;
+    margin-right: 2.5rem;
+    border-radius: 5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    cursor: pointer;
+    &--show-modal{
+        background-color: $color-primary;
+        font-size: 3rem;
+    }
+
+}
+.operations__tab{
+    transition: all .4s;
+}
+.operations__tab--1 {
+    background-color: $color-secondary-darker;
+}
+
+.operations__tab--2 {
+    background-color: $color-primary-darker;
+}
+
+.operations__tab--3 {
+    background-color: $color-tertiary-darker;
+}
+
+.operations__tab--active {
+    transform: translateY(-60%);
+}
+
+.slider__btn {
+    position: absolute;
+    font-size: 4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    top: 50%;
+    &--right {
+        right: 0;
+    }
+    &--left{
+        left: 0;
+    }
+}
+.btn--close-moldal{
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+    font-size: 3rem;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+}

@@ -1,0 +1,110 @@
+@mixin resp($break){
+    @if ($break ==phone){
+        @media screen and (max-width:35.25rem) {
+            @content;
+        }
+    }
+}
+@include resp(phone) {
+    html {
+        font-size: 50%;
+    }
+
+    .modal {
+        position: fixed;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+    }
+
+    .header .nav__link {
+        padding: 0;
+        font-size: 1.2rem;
+    }
+
+    body {
+        padding: 1rem;
+        overflow-x: hidden;
+    }
+
+    .header {
+        height: 60vh;
+        padding: 0 1rem;
+
+        .nav {
+            flex-direction: column;
+
+            ul {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    #section {
+        &--1 {
+            padding: 9rem 1rem;
+
+            .features {
+                margin: 0;
+            }
+        }
+
+        &--2 {
+            padding: 0;
+
+            .btn {
+                padding: .8rem 2rem;
+            }
+        }
+
+        &--3 {
+            padding: 0 0 5rem 0;
+
+            .slide {
+                position: absolute;
+            }
+        }
+    }
+
+    .section {
+        &__header {
+            font-size: 3rem;
+        }
+    }
+
+    .section--sign-up {
+
+        .btn--show-modal {
+            font-size: 1.5rem;
+        }
+    }
+
+    .footer {
+        padding: 0 !important;
+
+        &__menu {
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        &__list {
+            padding: 1rem 0;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        &__link {
+            text-transform: uppercase;
+        }
+
+        &__copyright {
+            width: 100% !important;
+            font-size: 1.7rem;
+            line-height: 3rem;
+            padding: 0 2rem 2rem 2rem;
+            margin: 0 auto;
+            display: inline-block;
+        }
+
+    }
+}

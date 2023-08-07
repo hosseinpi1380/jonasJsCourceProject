@@ -1,0 +1,97 @@
+@import '../base/mixin';
+
+.header {
+    height: 100vh;
+
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    padding: 3rem;
+
+    .nav {
+        // padding: 0 6rem;
+        @include flex(space-around, center);
+        flex-direction: row;
+
+        img {
+            height: 4.5rem;
+        }
+    }
+
+    .nav__menu {
+        @include flex(space-between);
+        flex-direction: row;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    .nav__list {
+        margin-left: 2rem;
+        text-decoration: none;
+
+        &:last-of-type a:visited,
+        &:last-of-type a:link {
+            background-color: $color-primary;
+            border-radius: 2rem;
+            padding: 1rem;
+        }
+    }
+
+    .nav__link {
+        text-decoration: none;
+        font-size: 1.7rem;
+        color: #444;
+    }
+
+    &__title {
+        flex:1;
+        max-width: 115rem;
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        row-gap: 3rem;
+        font-size: 2rem;
+        align-items: center;
+
+        align-content: center;
+        justify-items: start;
+        justify-content: center;
+
+        h1 {
+            font-size: 5.5rem;
+            font-weight: 500;
+        }
+
+        .highlight {
+            position: relative;
+
+            &::before {
+                content: ' ';
+                z-index: -1;
+                transform: skew(-20deg);
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                background-image: $gradient-primary;
+            }
+
+        }
+
+        button {
+            color: $color-primary;
+            font-size: 1.7rem;
+            background-color: transparent;
+            border: none;
+            border-bottom: .1rem solid $color-primary;
+            padding-bottom: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        grid-column: 2/3;
+        grid-row: 1/span 4;
+    }
+}
