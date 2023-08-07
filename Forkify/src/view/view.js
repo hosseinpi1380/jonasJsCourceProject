@@ -1,47 +1,21 @@
-"use strict";
-import 'core-js/stable';
-import 'regenerator-runtime/runtime'
-//most old browser will support our code //
-const renderSpinner = function (parent) {
-  const spinner = `
-  <div class="loading">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-  </svg>
-</div>`;
-  parent.insertAdjacentHTML("afterbegin", spinner);
-};
-const showRecipe = async function () {
-  try {
-    const id=window.location.hash.slice(1)
-    const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
-    const data = await res.json();
-    let { recipe } = data.data;
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      sourceImage: recipe.source_url,
-      servings: recipe.servings,
-      ingredients: recipe.ingredients,
-      image: recipe.image_url,
-      publisher: recipe.publisher,
-      cookingTime: recipe.cooking_time,
-    };
-    console.log(recipe);
-    let recipeContainer = `
+class RecipeView {
+    #data;
+    #parentElement = document.querySelector(".main");
+    render(data) {
+        this.#data = data;
+    }
+    #generateMarkup() {
+        return `
     <div class="recipe__main w-2/3">
           <div class="sourceImage h-[30%] flex flex-col items-center">
             <div class="image-source w-full h-full">
-            <img src="${recipe.image}" alt="${
-      recipe.image
-    }" class="w-full h-full object-cover">
+            <img src="${this.#data.image}" alt="${this.#data.image
+            }" class="w-full h-full object-cover">
             </div>
             <h1
               class="title-image bg-gradient-to-r -mt-[70px] from-left to-right inline-block px-2 py-1 font-medium text-3xl text-white -skew-y-6 "
             >
-              ${recipe.title}
+              ${this.#data.title}
             </h1>
           </div>
           <div class="recipe__info mt-4 flex flex-row justify-around">
@@ -60,9 +34,8 @@ const showRecipe = async function () {
                   d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <h1><span class="font-semibold">${
-                recipe.cookingTime
-              }</span> minutes</h1>
+              <h1><span class="font-semibold">${this.#data.cookingTime
+            }</span> minutes</h1>
             </div>
             <div class="cooking__serveings flex flex-row text-gray-900">
               <svg
@@ -80,9 +53,8 @@ const showRecipe = async function () {
                 />
               </svg>
 
-              <h1><span class="font-semibold">${
-                recipe.servings
-              }</span> servings</h1>
+              <h1><span class="font-semibold">${this.#data.servings
+            }</span> servings</h1>
               <button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -153,39 +125,29 @@ const showRecipe = async function () {
             </h1>
             <div class="recipe__ingredients-menu flex flex-row mt-6 justify-around w-[500px]">
               <ul class="menu__ingredients">
-                ${recipe.ingredients
-                  .map((ing) => {
+                ${this.#data.ingredients
+                .map((ing) => {
                     return `<li class="recipe__ingredient-list inline-block w-1/2 h-min">
                   <div class='flex'>
                   <div class='recipe__quantity'>${ing.quantity}</div>
                   <div class="recipe__description">
-                  ${ing.description}
+                  ${ing.description}this.#data
                     <span class="recipe__unit">${ing.unit}</span></div>
                   </div>
                   </li>`;
-                  })
-                  .join("")}
+                })
+                .join("")}
               </ul>
             </div>
           </div>
           <div class="guide-to-cook flex justify-center flex-col items-center mt-9 px-6">
             <h1 class="guide-title uppercase text-svg-color mb-4">How to cook it </h1>
-            <p class="guide-para">This recipe was carefully designed and tested by <span class="publisher">${
-              recipe.publisher
+            <p class="guide-para">This recipe was carefully designed and tested by <span class="publisher">${this.#data.publisher
             }</span>.
             Please check out directions at their website.</p>
             <button class="guide-directions bg-gradient-to-r from-left to-right p-3 rounded-xl text-white">Directions</button>
           </div>
         </div>`;
-
-        renderSpinner(recipeContainer)
-        recipeContainer.innerHTML=''
-        const mainRecipe = document.querySelector(".main");
-    mainRecipe.insertAdjacentHTML("beforeend", recipeContainer);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-showRecipe();
-['hashchange','load'].forEach(ev=>window.addEventListener(ev,showRecipe))
+    }
+}
+export default new RecipeView();
