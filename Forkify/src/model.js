@@ -8,7 +8,7 @@ export const loadRecipe=async function(id){
         );
         const data = await res.json();
         let { recipe } = data.data;
-        state.recipe = {
+        recipe = {
             id: recipe.id,
             title: recipe.title,
             sourceImage: recipe.source_url,
@@ -18,7 +18,7 @@ export const loadRecipe=async function(id){
             publisher: recipe.publisher,
             cookingTime: recipe.cooking_time,
         };
-        console.log(state.recipe);
+        state.recipe=recipe;
     }
     catch(err){
         console.log(err);

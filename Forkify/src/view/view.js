@@ -1,16 +1,24 @@
 class RecipeView {
-    #data;
-    #parentElement = document.querySelector(".main");
-    render(data) {
-        this.#data = data;
-    }
-    #generateMarkup() {
-        return `
+  #data;
+  #parentElement = document.querySelector(".main");
+  render(data) {
+    this.#data = data;
+    const markup = this.#generateMarkup();
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML("beforeend", markup);
+  }
+  #clear() {
+    this.#parentElement.innerHTML = '';
+  }
+  // renderSpinner(recipeContainer);
+
+  #generateMarkup() {
+    return `
     <div class="recipe__main w-2/3">
           <div class="sourceImage h-[30%] flex flex-col items-center">
             <div class="image-source w-full h-full">
-            <img src="${this.#data.image}" alt="${this.#data.image
-            }" class="w-full h-full object-cover">
+            <img src="${this.#data.image}" alt="${this.#data.image}
+      "class="w-full h-full object-cover">
             </div>
             <h1
               class="title-image bg-gradient-to-r -mt-[70px] from-left to-right inline-block px-2 py-1 font-medium text-3xl text-white -skew-y-6 "
@@ -35,7 +43,7 @@ class RecipeView {
                 />
               </svg>
               <h1><span class="font-semibold">${this.#data.cookingTime
-            }</span> minutes</h1>
+      }</span> minutes</h1>
             </div>
             <div class="cooking__serveings flex flex-row text-gray-900">
               <svg
@@ -54,7 +62,7 @@ class RecipeView {
               </svg>
 
               <h1><span class="font-semibold">${this.#data.servings
-            }</span> servings</h1>
+      }</span> servings</h1>
               <button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -126,8 +134,8 @@ class RecipeView {
             <div class="recipe__ingredients-menu flex flex-row mt-6 justify-around w-[500px]">
               <ul class="menu__ingredients">
                 ${this.#data.ingredients
-                .map((ing) => {
-                    return `<li class="recipe__ingredient-list inline-block w-1/2 h-min">
+        .map((ing) => {
+          return `<li class="recipe__ingredient-list inline-block w-1/2 h-min">
                   <div class='flex'>
                   <div class='recipe__quantity'>${ing.quantity}</div>
                   <div class="recipe__description">
@@ -135,19 +143,19 @@ class RecipeView {
                     <span class="recipe__unit">${ing.unit}</span></div>
                   </div>
                   </li>`;
-                })
-                .join("")}
+        })
+        .join("")}
               </ul>
             </div>
           </div>
           <div class="guide-to-cook flex justify-center flex-col items-center mt-9 px-6">
             <h1 class="guide-title uppercase text-svg-color mb-4">How to cook it </h1>
-            <p class="guide-para">This recipe was carefully designed and tested by <span class="publisher">${this.#data.publisher
-            }</span>.
+            <p class="guide-para">This recipe was carefully designed and tested by <span class="publisher">${this.#data.publisher}</span>.
             Please check out directions at their website.</p>
             <button class="guide-directions bg-gradient-to-r from-left to-right p-3 rounded-xl text-white">Directions</button>
           </div>
         </div>`;
-    }
+  }
 }
+
 export default new RecipeView();

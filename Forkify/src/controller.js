@@ -1,6 +1,6 @@
 "use strict";
-import 'core-js/stable';
-import 'regenerator-runtime/runtime'
+// import 'core-js/core';
+// import 'regenerator-runtime/runtime'
 import * as model from './model.js';
 import recipeView from './view/view.js';
 //most old browser will support our code // 
@@ -13,23 +13,16 @@ const renderSpinner = function (parent) {
 </div>`;
   parent.insertAdjacentHTML("afterbegin", spinner);
 };
-const showRecipe = async function () {
+const controlRecipe = async function () {
   try {
     const id=window.location.hash.slice(1)
-    renderSpinner(recipeContainer)
     await model.loadRecipe(id)
-    const {recipe}=model.state;
     recipeView.render(model.state.recipe);
-    
-
-        renderSpinner(recipeContainer)
-        recipeContainer.innerHTML=''
-        const mainRecipe = document.querySelector(".main");
-    mainRecipe.insertAdjacentHTML("beforeend", recipeContainer);
+    renderSpinner(recipeContainer)
   } catch (err) {
     console.log(err);
   }
 };
 
-showRecipe();
-['hashchange','load'].forEach(ev=>window.addEventListener(ev,showRecipe))
+controlRecipe();
+['hashchange','load'].forEach(ev=>window.addEventListener(ev,controlRecipe))
